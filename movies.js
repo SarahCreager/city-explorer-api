@@ -8,7 +8,6 @@ async function getMovie(request, response) {
   const MOVIE_API_URL = `https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${cityName}`;
   const APIresponse = await axios.get(MOVIE_API_URL);
 
-  //TODO:refactor this to try catch
   if (APIresponse.data) {
     const movieArray = APIresponse.data.results.map(film => new Movie(film));
     response.status(200).send(movieArray);

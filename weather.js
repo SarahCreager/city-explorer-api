@@ -11,7 +11,6 @@ async function getWeather(request, response) {
   const WEATHER_API_URL = `https://api.weatherbit.io/v2.0/forecast/daily/?lat=${lat}&lon=-${lon}&key=${weatherKey}&days=5&lan=en&units=I`;
   const APIresponse = await axios.get(WEATHER_API_URL);
 
-  // TODO:maybe refactor this to try catch
   if (APIresponse.data) {
     const weatherArray = APIresponse.data.data.map(day => new Forecast(day));
     response.status(200).send(weatherArray);
