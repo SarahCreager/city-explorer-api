@@ -1,15 +1,22 @@
 {
   "extends": "eslint:recommended",
   "parserOptions": {
-    "ecmaVersion": 6,
+    // "ecmaVersion": 6,
+    "ecmaVersion": 8,
     "ecmaFeatures": {
       "impliedStrict": true
     }
   },
+  // "env": {
+  //   "browser": true,
+  //   "es6": true
+  // },
+  
   "env": {
-    "browser": true,
+    "node": true,
     "es6": true
   },
+
   "rules": {
     "no-var": "error",
     "eqeqeq": ["error", "always"],
@@ -37,3 +44,4 @@
     "eol-last": "error"
   }
 }
+
