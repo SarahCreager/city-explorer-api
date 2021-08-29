@@ -75,7 +75,7 @@ Finish time: __9:00pm___
 Actual time needed to complete: __30 min___
 
 
-08-24-2021
+08-26-2021
 
 Name of feature: ____Refactor code____________________________
 
@@ -88,19 +88,19 @@ Finish time: __4:30pm___
 Actual time needed to complete: _30 min____
 
 
-08-26-2021 - 08-27-2021
+08-27-2021 - 08-28-2021
 
 Name of feature: ____Add cache and timestamp____________________________
 
 Estimate of time needed to complete: __4 hours___
 
-Start time 8/26/21: __3:00pm___
+Start time 8/27/21: __3:00pm___
 
-Finish time 8/26/21: __7:00pm___
+Finish time 8/27/21: __7:00pm___
 
-Start time 8/27/21: __1:00pm___
+Start time 8/28/21: __1:00pm___
 
-Finish time 8/27/21: __4:00pm___
+Finish time 8/28/21: __4:00pm___
 
 Actual time needed to complete: _7 hours____
 
