@@ -1,24 +1,37 @@
 //Imports
 const axios = require('axios');
 const weatherKey = process.env.WEATHER_API_KEY;
+const inMemoryDB = require('./cache.js');
 
-
-//Function
+//Functions
 async function getWeather(request, response) {
   let lat = request.query.lat;
   let lon = request.query.lon;
+  let cityName = `weather-${lat}${lon}`;
 
-  const WEATHER_API_URL = `https://api.weatherbit.io/v2.0/forecast/daily/?lat=${lat}&lon=-${lon}&key=${weatherKey}&days=5&lan=en&units=I`;
+  if (inMemoryDB[cityName]) {
+    if ((Date.now() - inMemoryDB[cityName].timestamp) < 1000 * 60 * 10) {
+      console.log('cache hit', cityName);
+      response.send(inMemoryDB[cityName].data);
+    } else {
+      cacheMiss(request, response, cityName);
+    }
+  } else {
+    cacheMiss(request, response, cityName);
+  }
+}
+
+async function cacheMiss (request, response, cityName){
+  console.log('cache miss', cityName);
+  inMemoryDB[cityName] = {};
+  inMemoryDB[cityName].timestamp = Date.now();
+
+  const WEATHER_API_URL = `https://api.weatherbit.io/v2.0/forecast/daily/?lat=${request.query.lat}&lon=-${request.query.lon}&key=${weatherKey}&days=5&lan=en&units=I`;
   const APIresponse = await axios.get(WEATHER_API_URL);
 
-  if (APIresponse.data) {
-    const weatherArray = APIresponse.data.data.map(day => new Forecast(day));
-    response.status(200).send(weatherArray);
-  } else if (APIresponse.data === undefined){
-    response.status(400).send('no city found');
-  } else {
-    response.status(500).send('internal server error');
-  }
+  const weatherArray = APIresponse.data.data.map(day => new Forecast(day));
+  inMemoryDB[cityName].data = weatherArray;
+  response.status(200).send(weatherArray);
 }
 
 //Class
@@ -31,4 +44,6 @@ class Forecast{
 
 //Export
 module.exports = getWeather;
+
+
 
